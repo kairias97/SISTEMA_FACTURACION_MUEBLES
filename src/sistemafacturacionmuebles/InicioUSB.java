@@ -20,60 +20,44 @@ public class InicioUSB {
     /**
      * @param args the command line arguments
      */
-    public static String leerUSB(String Puerto){
+    public static String leerUSB(String[] Puerto){
         try {  
-            String s="";
-           Process p = Runtime.getRuntime().exec("cmd /C vol "+Puerto+":");  
-            BufferedReader in = new BufferedReader(  
+           int n = Puerto.length;
+            for (int i = 0; i < n; i++) {
+                String s="";
+                Process p = Runtime.getRuntime().exec("cmd /C vol "+Puerto[i]+":");  
+                BufferedReader in = new BufferedReader(  
                                 new InputStreamReader(p.getInputStream()));  
-            String line = null;  
-            while ((line = in.readLine()) != null) { 
-                s=line;//Al final leera la ultima linea
-            }  
-            p.destroy();
-            if(s!=""){
-                return s;
+                String line = null;  
+                while ((line = in.readLine()) != null) { 
+                    s=line;//Al final leera la ultima linea
+                }  
+                p.destroy();
+                if(!s.equals("")){
+                    return s;
+                }
             }
+           
             
         } catch (IOException e) {  
             e.printStackTrace();  
         }
-    return "";
+        return "";
     
     }
     public static void main(String[] args) {
         // TODO code application logic here
         String codigo="";
+        String[] P = {"F","G","H","I","J","K","L","E"};
+        codigo=leerUSB(P);
+        codigo=codigo.substring(36);
+        //JOptionPane.showMessageDialog(null, codigo);
         
-        codigo=leerUSB("F");
-        if(!codigo.equals("")){
-            codigo=codigo.substring(36);
-        } else{
-            codigo=leerUSB("I");
-            if(!codigo.equals("")){
-                codigo=codigo.substring(36);
-            } else{
-                codigo=leerUSB("E");
-                if(!codigo.equals("")){
-                    codigo=codigo.substring(36);
-                } else{
-                    codigo=leerUSB("H");
-                    if(!codigo.equals("")){
-                        codigo=codigo.substring(36);
-                    } else {
-                        codigo=leerUSB("G");
-                        if(!codigo.equals("")){
-                            codigo=codigo.substring(36);
-                        }
-                    }
-                }
-            }
-        }
-        if(codigo.equals("8218-BE34")){
+        if(codigo.equals("8218-BE34") || codigo.equals("DC5E-908A")){
             Login l = new Login();
             l.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(null, "No se inserto correctamente la usb");
+            JOptionPane.showMessageDialog(null, "No se insertó correctamente la usb");
             MsgUSB m = new MsgUSB();
             m.setVisible(true);
         }
