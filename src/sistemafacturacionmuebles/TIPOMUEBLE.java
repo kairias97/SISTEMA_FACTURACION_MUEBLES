@@ -125,6 +125,7 @@ public class TIPOMUEBLE extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tDatosTM.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tDatosTM.setColumnSelectionAllowed(true);
         tDatosTM.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tDatosTM);

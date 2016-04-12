@@ -126,14 +126,10 @@ public class Login extends javax.swing.JFrame {
         if(!h){
             JOptionPane.showMessageDialog(null, "Usuario o clave inválidos");
         } else{
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
             String clave = new String(this.txtClave.getPassword());
             u= new USER(this.txtUser.getText(), clave,dAdmin);
             MENUSFM m = new MENUSFM(this.u);
-            m.setExtendedState(JFrame.MAXIMIZED_BOTH);
-            m.setSize(screenSize);
             m.setVisible(true);
-            m.setResizable(false);
             this.dispose();
         }
         //Incluir el while rs.next

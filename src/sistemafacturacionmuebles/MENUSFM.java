@@ -34,8 +34,8 @@ public class MENUSFM extends javax.swing.JFrame {
     
     public MENUSFM(USER user) {
         initComponents();
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        Dimension screenSize = new Dimension(1280,720);
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setSize(screenSize);
         u=user;
         conect = new CONEXION();
@@ -448,7 +448,8 @@ public class MENUSFM extends javax.swing.JFrame {
         setTitle("SISTEMA DE FACTURACION DE MUEBLES");
         setBackground(new java.awt.Color(0, 0, 102));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setResizable(false);
+        setMinimumSize(new java.awt.Dimension(1280, 720));
+        setPreferredSize(new java.awt.Dimension(1280, 720));
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
 
         desktopPane.setBackground(new java.awt.Color(0, 51, 153));
