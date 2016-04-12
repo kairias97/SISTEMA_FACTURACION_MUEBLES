@@ -85,13 +85,12 @@ public class TIPOMUEBLE extends javax.swing.JInternalFrame {
         txtIDTM = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescripcionTM = new javax.swing.JTextArea();
-        jSPTM = new javax.swing.JScrollPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tDatosTM = new javax.swing.JTable();
         saveTM = new javax.swing.JButton();
         deleteTM = new javax.swing.JButton();
         newTM = new javax.swing.JButton();
         showTM = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tDatosTM = new javax.swing.JTable();
 
         setClosable(true);
         setTitle("CATALOGO TIPO DE MUEBLES");
@@ -109,6 +108,35 @@ public class TIPOMUEBLE extends javax.swing.JInternalFrame {
         txtDescripcionTM.setRows(5);
         jScrollPane1.setViewportView(txtDescripcionTM);
 
+        saveTM.setText("Guardar");
+        saveTM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveTMActionPerformed(evt);
+            }
+        });
+
+        deleteTM.setText("Eliminar");
+        deleteTM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteTMActionPerformed(evt);
+            }
+        });
+
+        newTM.setText("Nuevo");
+        newTM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newTMActionPerformed(evt);
+            }
+        });
+
+        showTM.setText("Mostrar todos");
+        showTM.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                showTMMouseClicked(evt);
+            }
+        });
+
+        tDatosTM.setAutoCreateRowSorter(true);
         tDatosTM.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null}
@@ -139,36 +167,6 @@ public class TIPOMUEBLE extends javax.swing.JInternalFrame {
             tDatosTM.getColumnModel().getColumn(2).setPreferredWidth(110);
         }
 
-        jSPTM.setViewportView(jScrollPane2);
-
-        saveTM.setText("Guardar");
-        saveTM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveTMActionPerformed(evt);
-            }
-        });
-
-        deleteTM.setText("Eliminar");
-        deleteTM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteTMActionPerformed(evt);
-            }
-        });
-
-        newTM.setText("Nuevo");
-        newTM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newTMActionPerformed(evt);
-            }
-        });
-
-        showTM.setText("Mostrar todos");
-        showTM.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                showTMMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,21 +175,20 @@ public class TIPOMUEBLE extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel4))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(activoTM)
                                             .addComponent(txtIDTM, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(0, 0, Short.MAX_VALUE))))
-                            .addComponent(jSPTM, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(newTM)
                                 .addGap(18, 18, 18)
@@ -199,11 +196,12 @@ public class TIPOMUEBLE extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(deleteTM)
                                 .addGap(18, 18, 18)
-                                .addComponent(showTM))))
+                                .addComponent(showTM))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(172, 172, 172)
                         .addComponent(jLabel1)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,8 +227,8 @@ public class TIPOMUEBLE extends javax.swing.JInternalFrame {
                     .addComponent(deleteTM)
                     .addComponent(showTM))
                 .addGap(18, 18, 18)
-                .addComponent(jSPTM, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -313,7 +311,6 @@ public class TIPOMUEBLE extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JScrollPane jSPTM;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton newTM;

@@ -159,7 +159,7 @@ public class MENUSFM extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         msgAU = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        comboAdmin = new javax.swing.JComboBox<>();
+        comboAdmin = new javax.swing.JComboBox<String>();
         borrarUser = new javax.swing.JDialog();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -277,6 +277,9 @@ public class MENUSFM extends javax.swing.JFrame {
                 .addGap(28, 28, 28))
         );
 
+        agregarUser.setTitle("Opciones administrativas");
+        agregarUser.setMinimumSize(new java.awt.Dimension(370, 288));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Adición de nuevos usuarios");
 
@@ -315,7 +318,7 @@ public class MENUSFM extends javax.swing.JFrame {
 
         jLabel7.setText("Administrador:");
 
-        comboAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO", "SI" }));
+        comboAdmin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NO", "SI" }));
 
         javax.swing.GroupLayout agregarUserLayout = new javax.swing.GroupLayout(agregarUser.getContentPane());
         agregarUser.getContentPane().setLayout(agregarUserLayout);
@@ -349,7 +352,7 @@ public class MENUSFM extends javax.swing.JFrame {
         agregarUserLayout.setVerticalGroup(
             agregarUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(agregarUserLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(agregarUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -367,12 +370,16 @@ public class MENUSFM extends javax.swing.JFrame {
                 .addGroup(agregarUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(comboAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(msgAU, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAdd)
-                .addGap(41, 41, 41))
+                .addGap(50, 50, 50))
         );
+
+        borrarUser.setTitle("Opciones administrativas");
+        borrarUser.setMinimumSize(new java.awt.Dimension(320, 180));
+        borrarUser.setPreferredSize(new java.awt.Dimension(320, 180));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Eliminación de usuario");
@@ -416,28 +423,29 @@ public class MENUSFM extends javax.swing.JFrame {
         borrarUserLayout.setHorizontalGroup(
             borrarUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(borrarUserLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(borrarUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(msgBU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(borrarUserLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtUserBU, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(69, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, borrarUserLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(41, 41, 41)
                 .addGroup(borrarUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(borrarUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(msgBU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(borrarUserLayout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtUserBU, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, borrarUserLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(84, 84, 84))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, borrarUserLayout.createSequentialGroup()
-                        .addComponent(btnBorrarBU)
-                        .addGap(114, 114, 114))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(borrarUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, borrarUserLayout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(15, 15, 15))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, borrarUserLayout.createSequentialGroup()
+                                .addComponent(btnBorrarBU)
+                                .addGap(45, 45, 45)))))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         borrarUserLayout.setVerticalGroup(
             borrarUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(borrarUserLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, borrarUserLayout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addGroup(borrarUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -447,7 +455,7 @@ public class MENUSFM extends javax.swing.JFrame {
                 .addComponent(msgBU, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnBorrarBU)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -455,8 +463,6 @@ public class MENUSFM extends javax.swing.JFrame {
         setBackground(new java.awt.Color(0, 0, 102));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(1280, 720));
-        setPreferredSize(new java.awt.Dimension(1280, 720));
-        setSize(Toolkit.getDefaultToolkit().getScreenSize());
 
         desktopPane.setBackground(new java.awt.Color(0, 51, 153));
         desktopPane.setForeground(new java.awt.Color(0, 51, 153));
@@ -548,11 +554,11 @@ public class MENUSFM extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
         );
 
         pack();
@@ -584,10 +590,10 @@ public class MENUSFM extends javax.swing.JFrame {
             
             //REVISAR ESTO LOL
             //Codigo para añadir nuevo usuario
-            //this.cambioClave.setLocationRelativeTo(null);
+            this.cambioClave.setLocationRelativeTo(null);
             //this.cambioClave.setSize(325, 250);
-            //this.cambioClave.setResizable(false);
-            //this.cambioClave.setVisible(true);
+            this.cambioClave.setResizable(false);
+            this.cambioClave.setVisible(true);
         } else{
             JOptionPane.showMessageDialog(null,"No cuenta con privilegios suficientes para realizar esta acción!");
         }
@@ -602,7 +608,7 @@ public class MENUSFM extends javax.swing.JFrame {
         if(u.getAdmin()){
             //Codigo para añadir nuevo usuario
             this.agregarUser.setLocationRelativeTo(null);
-            this.agregarUser.setSize(370, 290);
+            //this.agregarUser.setSize(370, 290);
             this.agregarUser.setResizable(false);
             this.agregarUser.setVisible(true);
         } else{
@@ -619,7 +625,7 @@ public class MENUSFM extends javax.swing.JFrame {
         if(u.getAdmin()){
             //Codigo para añadir nuevo usuario
             this.borrarUser.setLocationRelativeTo(null);
-            this.borrarUser.setSize(330, 210);
+            //this.borrarUser.setSize(330, 210);
             this.borrarUser.setResizable(false);
             this.borrarUser.setVisible(true);
         } else{
@@ -659,6 +665,7 @@ public class MENUSFM extends javax.swing.JFrame {
             this.txtClaveNew2.setText("");
             this.txtClaveOld.setText("");
             JOptionPane.showMessageDialog(null, "Clave cambiada con éxito!");
+            this.msgCC.setText("");
             this.hCC=false;
         } else{
             JOptionPane.showMessageDialog(null,"Datos inválidos. Imposible cambiar clave!");

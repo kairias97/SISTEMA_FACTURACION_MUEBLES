@@ -163,6 +163,22 @@ public class CLIENTE extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane3.setViewportView(tDatos);
+        if (tDatos.getColumnModel().getColumnCount() > 0) {
+            tDatos.getColumnModel().getColumn(0).setResizable(false);
+            tDatos.getColumnModel().getColumn(0).setPreferredWidth(150);
+            tDatos.getColumnModel().getColumn(1).setResizable(false);
+            tDatos.getColumnModel().getColumn(1).setPreferredWidth(280);
+            tDatos.getColumnModel().getColumn(2).setResizable(false);
+            tDatos.getColumnModel().getColumn(2).setPreferredWidth(90);
+            tDatos.getColumnModel().getColumn(3).setResizable(false);
+            tDatos.getColumnModel().getColumn(3).setPreferredWidth(90);
+            tDatos.getColumnModel().getColumn(4).setResizable(false);
+            tDatos.getColumnModel().getColumn(4).setPreferredWidth(100);
+            tDatos.getColumnModel().getColumn(5).setResizable(false);
+            tDatos.getColumnModel().getColumn(5).setPreferredWidth(200);
+            tDatos.getColumnModel().getColumn(6).setResizable(false);
+            tDatos.getColumnModel().getColumn(6).setPreferredWidth(100);
+        }
 
         saveDC.setText("Guardar");
         saveDC.addActionListener(new java.awt.event.ActionListener() {
