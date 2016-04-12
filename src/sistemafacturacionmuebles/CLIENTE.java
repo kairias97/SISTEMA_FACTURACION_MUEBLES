@@ -28,9 +28,10 @@ public class CLIENTE extends javax.swing.JInternalFrame {
         a=1;
         updateGrid("Select * from clientes WHERE activo='"+this.a+"';");
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        
     }
     
-    public void updateGrid(String sql){
+    private void updateGrid(String sql){
         conect.CONECTAR();
         try {
             
@@ -67,6 +68,13 @@ public class CLIENTE extends javax.swing.JInternalFrame {
     
         }
     
+    private void checkGrid(){ //Para saber que mostrar en el Grid
+        if(this.a==0){
+            updateGrid("select * from clientes;");
+        } else {
+            updateGrid("select * from clientes WHERE activo=1;");
+        }
+    }
         public void limpiar(){
             this.idcliente.setText("");
             this.nombre.setText("");
@@ -111,8 +119,19 @@ public class CLIENTE extends javax.swing.JInternalFrame {
         setTitle("CATALOGO DE CLIENTES");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        nombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nombreFocusLost(evt);
+            }
+        });
+
         sexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Femenino" }));
 
+        telefono.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                telefonoFocusLost(evt);
+            }
+        });
         telefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 telefonoActionPerformed(evt);
@@ -125,6 +144,11 @@ public class CLIENTE extends javax.swing.JInternalFrame {
             }
         });
 
+        email.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                emailFocusLost(evt);
+            }
+        });
         email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailActionPerformed(evt);
@@ -165,7 +189,7 @@ public class CLIENTE extends javax.swing.JInternalFrame {
         jScrollPane3.setViewportView(tDatos);
         if (tDatos.getColumnModel().getColumnCount() > 0) {
             tDatos.getColumnModel().getColumn(0).setResizable(false);
-            tDatos.getColumnModel().getColumn(0).setPreferredWidth(150);
+            tDatos.getColumnModel().getColumn(0).setPreferredWidth(120);
             tDatos.getColumnModel().getColumn(1).setResizable(false);
             tDatos.getColumnModel().getColumn(1).setPreferredWidth(280);
             tDatos.getColumnModel().getColumn(2).setResizable(false);
@@ -217,6 +241,11 @@ public class CLIENTE extends javax.swing.JInternalFrame {
         jLabel7.setText("Edad:");
 
         idcliente.setEditable(false);
+        idcliente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                idclienteFocusLost(evt);
+            }
+        });
         idcliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idclienteActionPerformed(evt);
@@ -272,7 +301,7 @@ public class CLIENTE extends javax.swing.JInternalFrame {
                                 .addComponent(saveDC)
                                 .addGap(18, 18, 18)
                                 .addComponent(deleteDC)
-                                .addGap(30, 30, 30)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnMostrar))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -358,6 +387,7 @@ public class CLIENTE extends javax.swing.JInternalFrame {
 
     private void tDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tDatosMouseClicked
         // TODO add your handling code here:
+        this.idcliente.setEditable(false);
         int fila = this.tDatos.getSelectedRow();
         this.idcliente.setText((String) this.tDatos.getValueAt(fila, 0));
         this.nombre.setText((String) this.tDatos.getValueAt(fila, 1));
@@ -374,7 +404,7 @@ public class CLIENTE extends javax.swing.JInternalFrame {
         int activo = this.activo.isSelected()?1:0;
         String sexo = this.sexo.getSelectedIndex()==0?"1":"0";
         if(this.tDatos.getSelectedRow()==-1){
-            if(!nombre.getText().equals("") && !telefono.getText().equals("") && !email.getText().equals("")){
+            if(!idcliente.getText().equals("")&&!nombre.getText().equals("") && !telefono.getText().equals("") && !email.getText().equals("") && !edad.getText().equals("")){
                 conect.EJECUTAR("INSERT INTO clientes(id_cliente, nombre, telefono, email, activo, edad, sexo) VALUES('"+this.idcliente.getText()+"', '"+nombre.getText()+"', '"+telefono.getText()+"', '"+email.getText()+"', '"+activo+"', "+this.edad.getText()+", "+sexo+");");
                 JOptionPane.showMessageDialog(null, "Datos ingresados correctamente");
                 limpiar();
@@ -395,7 +425,7 @@ public class CLIENTE extends javax.swing.JInternalFrame {
         }
 
         conect.CERRAR();
-        updateGrid("Select * from clientes WHERE activo='"+this.a+"';");
+        this.checkGrid();
 
     }//GEN-LAST:event_saveDCActionPerformed
 
@@ -412,27 +442,63 @@ public class CLIENTE extends javax.swing.JInternalFrame {
         conect.EJECUTAR("");
         limpiar();
         conect.CERRAR();
-        updateGrid("select * from clientes WHERE activo='"+this.a+"'");
+        this.checkGrid();
     }//GEN-LAST:event_deleteDCActionPerformed
 
     private void btnMostrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarMouseClicked
         // TODO add your handling code here:
         if(this.a==1){
             this.a=0;
-            updateGrid("Select * from clientes;");
             this.btnMostrar.setText("Mostrar solo activos");
         } else if(this.a==0){
             this.a=1;
-            updateGrid("Select * from clientes WHERE activo='"+this.a+"';");
             this.btnMostrar.setText("Mostrar todos");
-
         }
+        this.checkGrid();
 
     }//GEN-LAST:event_btnMostrarMouseClicked
 
     private void idclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idclienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_idclienteActionPerformed
+
+    private void idclienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idclienteFocusLost
+        // TODO add your handling code here:
+        if(this.idcliente.getText().length() > 16){
+            JOptionPane.showMessageDialog(null, "Su ID de cedula no debe exceder los 16 caracteres!");
+            this.idcliente.setText("");
+        }
+    }//GEN-LAST:event_idclienteFocusLost
+
+    private void nombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nombreFocusLost
+        // TODO add your handling code here:
+        if(this.nombre.getText().length() > 60){
+            JOptionPane.showMessageDialog(null, "El nombre completo no puede exceder los 60 caracteres!");
+            this.nombre.setText("");
+        }
+    }//GEN-LAST:event_nombreFocusLost
+
+    private void telefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_telefonoFocusLost
+        // TODO add your handling code here:
+        if(this.telefono.getText().length() > 8 || this.telefono.getText().length() < 8){
+            JOptionPane.showMessageDialog(null, "La longitud del telefono debe de ser 8 caracteres!");
+            this.telefono.setText("");
+        } else{
+            try{
+                int t = Integer.parseInt(this.telefono.getText());
+            } catch(NumberFormatException n){
+                JOptionPane.showMessageDialog(null, "Error! El n° de telefono no puede contener letras!");
+            }
+        }
+    }//GEN-LAST:event_telefonoFocusLost
+
+    private void emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusLost
+        // TODO add your handling code here:
+        if(this.email.getText().length() > 50){
+            JOptionPane.showMessageDialog(null, "La longitud del correo no puede ser mayor a 50 caracteres!");
+            this.email.setText("");
+        }
+    }//GEN-LAST:event_emailFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

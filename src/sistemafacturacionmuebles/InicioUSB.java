@@ -48,7 +48,7 @@ public class InicioUSB {
     public static void main(String[] args) {
         // TODO code application logic here
         String codigo="";
-        String[] P = {"F","G","H","I","J","K","L","E"};
+        String[] P = {"F","G","H","I","J","K","L","E","D"};
         codigo=leerUSB(P);
         codigo=codigo.substring(36);
         //JOptionPane.showMessageDialog(null, codigo);

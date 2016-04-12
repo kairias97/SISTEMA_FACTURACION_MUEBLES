@@ -78,7 +78,7 @@
                               <Component id="saveDC" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="deleteDC" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnMostrar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -148,6 +148,9 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="nombre">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="nombreFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="sexo">
       <Properties>
@@ -161,6 +164,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="telefono">
       <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="telefonoFocusLost"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="telefonoActionPerformed"/>
       </Events>
     </Component>
@@ -171,6 +175,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="email">
       <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="emailFocusLost"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="emailActionPerformed"/>
       </Events>
     </Component>
@@ -206,7 +211,7 @@
             <Property name="autoResizeMode" type="int" value="0"/>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="150" resizable="false">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="120" resizable="false">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -322,6 +327,7 @@
         <Property name="editable" type="boolean" value="false"/>
       </Properties>
       <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="idclienteFocusLost"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="idclienteActionPerformed"/>
       </Events>
     </Component>

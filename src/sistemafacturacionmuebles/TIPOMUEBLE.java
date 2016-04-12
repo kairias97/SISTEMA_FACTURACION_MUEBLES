@@ -65,7 +65,15 @@ public class TIPOMUEBLE extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
         conect.CERRAR();
+    }
+    
+    private void checkGrid(){ //Para saber que mostrar en el Grid
+        if(this.a==0){
+            updateGrid("select * from tipo;");
+        } else {
+            updateGrid("select * from tipo WHERE activo=1;");
         }
+    }
     
     /**
     /**
@@ -104,8 +112,19 @@ public class TIPOMUEBLE extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Activo:");
 
+        txtIDTM.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtIDTMFocusLost(evt);
+            }
+        });
+
         txtDescripcionTM.setColumns(20);
         txtDescripcionTM.setRows(5);
+        txtDescripcionTM.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDescripcionTMFocusLost(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtDescripcionTM);
 
         saveTM.setText("Guardar");
@@ -261,7 +280,7 @@ public class TIPOMUEBLE extends javax.swing.JInternalFrame {
         }
 
         conect.CERRAR();
-        updateGrid("Select * from tipo WHERE activo=1;");
+        this.checkGrid();
 
     }//GEN-LAST:event_saveTMActionPerformed
 
@@ -278,7 +297,7 @@ public class TIPOMUEBLE extends javax.swing.JInternalFrame {
         conect.EJECUTAR("");
         limpiar();
         conect.CERRAR();
-        updateGrid("select * from id_tipo");
+        this.checkGrid();
     }//GEN-LAST:event_deleteTMActionPerformed
 
     private void newTMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newTMActionPerformed
@@ -293,15 +312,29 @@ public class TIPOMUEBLE extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if(this.a==1){
             this.a=0;
-            updateGrid("Select * from tipo;");
             this.showTM.setText("Mostrar solo activos");
         } else if(this.a==0){
             this.a=1;
-            updateGrid("Select * from tipo WHERE activo='"+this.a+"';");
             this.showTM.setText("Mostrar todos");
-        
         }
+        this.checkGrid();
     }//GEN-LAST:event_showTMMouseClicked
+
+    private void txtIDTMFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIDTMFocusLost
+        // TODO add your handling code here:
+        if(this.txtIDTM.getText().length() > 5){
+            JOptionPane.showMessageDialog(null, "La longitud del codigo no puede exceder los 5 caracteres!");
+            this.txtIDTM.setText("");
+        }
+    }//GEN-LAST:event_txtIDTMFocusLost
+
+    private void txtDescripcionTMFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescripcionTMFocusLost
+        // TODO add your handling code here:
+        if(this.txtDescripcionTM.getText().length() > 60){
+            JOptionPane.showMessageDialog(null, "La descripcion no puede exceder los 60 caracteres!");
+            this.txtIDTM.setText("");
+        }
+    }//GEN-LAST:event_txtDescripcionTMFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

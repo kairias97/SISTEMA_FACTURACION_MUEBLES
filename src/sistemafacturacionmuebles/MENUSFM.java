@@ -159,7 +159,7 @@ public class MENUSFM extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         msgAU = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        comboAdmin = new javax.swing.JComboBox<String>();
+        comboAdmin = new javax.swing.JComboBox<>();
         borrarUser = new javax.swing.JDialog();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -172,8 +172,9 @@ public class MENUSFM extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        Clientes = new javax.swing.JMenuItem();
+        tipoM = new javax.swing.JMenuItem();
+        Materiales = new javax.swing.JMenuItem();
         cambioClaveM = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -318,7 +319,7 @@ public class MENUSFM extends javax.swing.JFrame {
 
         jLabel7.setText("Administrador:");
 
-        comboAdmin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NO", "SI" }));
+        comboAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO", "SI" }));
 
         javax.swing.GroupLayout agregarUserLayout = new javax.swing.GroupLayout(agregarUser.getContentPane());
         agregarUser.getContentPane().setLayout(agregarUserLayout);
@@ -379,7 +380,6 @@ public class MENUSFM extends javax.swing.JFrame {
 
         borrarUser.setTitle("Opciones administrativas");
         borrarUser.setMinimumSize(new java.awt.Dimension(320, 180));
-        borrarUser.setPreferredSize(new java.awt.Dimension(320, 180));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Eliminación de usuario");
@@ -484,21 +484,29 @@ public class MENUSFM extends javax.swing.JFrame {
 
         jMenu2.setText("Catálogos");
 
-        jMenuItem3.setText("Clientes");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        Clientes.setText("Clientes");
+        Clientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                ClientesActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem3);
+        jMenu2.add(Clientes);
 
-        jMenuItem8.setText("Tipo de Muebles");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        tipoM.setText("Tipo de Muebles");
+        tipoM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                tipoMActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem8);
+        jMenu2.add(tipoM);
+
+        Materiales.setText("Materiales");
+        Materiales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MaterialesActionPerformed(evt);
+            }
+        });
+        jMenu2.add(Materiales);
 
         jMenuBar1.add(jMenu2);
 
@@ -575,14 +583,14 @@ public class MENUSFM extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void ClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClientesActionPerformed
         // TODO add your handling code here:
         CLIENTE c = new CLIENTE();
         c.setVisible(true);
         this.desktopPane.add(c);
        
 
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_ClientesActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
@@ -770,12 +778,19 @@ public class MENUSFM extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBorrarBUMouseClicked
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+    private void tipoMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoMActionPerformed
         // TODO add your handling code here:
         TIPOMUEBLE tm = new TIPOMUEBLE();
         tm.setVisible(true);
         this.desktopPane.add(tm);
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    }//GEN-LAST:event_tipoMActionPerformed
+
+    private void MaterialesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaterialesActionPerformed
+        // TODO add your handling code here:
+        MATERIALES mat = new MATERIALES();
+        mat.setVisible(true);
+        this.desktopPane.add(mat);
+    }//GEN-LAST:event_MaterialesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -813,6 +828,8 @@ public class MENUSFM extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Clientes;
+    private javax.swing.JMenuItem Materiales;
     private javax.swing.JDialog agregarUser;
     private javax.swing.JDialog borrarUser;
     private javax.swing.JButton btnAdd;
@@ -838,15 +855,14 @@ public class MENUSFM extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JLabel msgAU;
     private javax.swing.JLabel msgBU;
     private javax.swing.JLabel msgCC;
+    private javax.swing.JMenuItem tipoM;
     private javax.swing.JPasswordField txtClave1AU;
     private javax.swing.JPasswordField txtClave2AU;
     private javax.swing.JPasswordField txtClaveNew;
