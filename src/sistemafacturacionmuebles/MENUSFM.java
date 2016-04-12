@@ -5,6 +5,7 @@
  */
 package sistemafacturacionmuebles;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -15,6 +16,8 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
 
 /**
  *
@@ -30,7 +33,7 @@ public class MENUSFM extends javax.swing.JFrame {
     CONEXION conect;
     boolean hUB; //Se hallo coincidencia en borrarUSER
     boolean hAU; //Se puede crear
-    boolean hCC; //Se pued
+    boolean hCC; //Se puede cambiar clave
     
     public MENUSFM(USER user) {
         initComponents();
@@ -177,6 +180,11 @@ public class MENUSFM extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
 
+        cambioClave.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        cambioClave.setTitle("Opciones administrativas");
+        cambioClave.setMinimumSize(new java.awt.Dimension(325, 240));
+        cambioClave.setResizable(false);
+
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("Cambio de clave");
 
@@ -223,34 +231,32 @@ public class MENUSFM extends javax.swing.JFrame {
         cambioClaveLayout.setHorizontalGroup(
             cambioClaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cambioClaveLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
                 .addGroup(cambioClaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cambioClaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(cambioClaveLayout.createSequentialGroup()
+                            .addGap(65, 65, 65)
+                            .addComponent(jLabel8))
+                        .addGroup(cambioClaveLayout.createSequentialGroup()
+                            .addGroup(cambioClaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel10)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel11))
+                            .addGap(26, 26, 26)
+                            .addGroup(cambioClaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtClaveNew)
+                                .addComponent(txtClaveNew2)
+                                .addComponent(txtClaveOld, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(msgCC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(cambioClaveLayout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(jLabel8))
-                    .addGroup(cambioClaveLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(cambioClaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel11))
-                        .addGap(26, 26, 26)
-                        .addGroup(cambioClaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtClaveNew)
-                            .addComponent(txtClaveNew2, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
-                            .addComponent(txtClaveOld)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cambioClaveLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(msgCC, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cambioClaveLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnCambio)
-                .addGap(105, 105, 105))
+                        .addGap(81, 81, 81)
+                        .addComponent(btnCambio)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         cambioClaveLayout.setVerticalGroup(
             cambioClaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cambioClaveLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
                 .addGroup(cambioClaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -264,11 +270,11 @@ public class MENUSFM extends javax.swing.JFrame {
                 .addGroup(cambioClaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(txtClaveNew2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(msgCC, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCambio)
-                .addContainerGap())
+                .addGap(28, 28, 28))
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -575,11 +581,13 @@ public class MENUSFM extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
         if(u.getAdmin()){
+            
+            //REVISAR ESTO LOL
             //Codigo para añadir nuevo usuario
-            this.cambioClave.setLocationRelativeTo(null);
-            this.cambioClave.setSize(325, 250);
-            this.cambioClave.setResizable(false);
-            this.cambioClave.setVisible(true);
+            //this.cambioClave.setLocationRelativeTo(null);
+            //this.cambioClave.setSize(325, 250);
+            //this.cambioClave.setResizable(false);
+            //this.cambioClave.setVisible(true);
         } else{
             JOptionPane.showMessageDialog(null,"No cuenta con privilegios suficientes para realizar esta acción!");
         }
