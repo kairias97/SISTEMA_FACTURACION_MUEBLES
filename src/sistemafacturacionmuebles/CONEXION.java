@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aplicacionjavaconmysql;
+package sistemafacturacionmuebles;
 import java.sql.*;
 import javax.swing.*;
 import java.sql.PreparedStatement;
@@ -14,10 +14,10 @@ import java.sql.ResultSet;
  */
 public class CONEXION { //Esta clase puede llamarse conexion
     //Datos de la conexión
-    public String servidor = "localhost";
-    public String nameDB = "agenda";
-    public String login = "root";
-    public String password = "kairias97";
+    public String servidor = "sql5.freemysqlhosting.net";
+    public String nameDB = "sql5113770";
+    public String login = "sql5113770";
+    public String password = "RXv6DPXMwF";
     
     public String url = "jdbc:mysql://"+servidor+":3306/"+nameDB;
     public Connection Link = null;
@@ -73,6 +73,7 @@ public class CONEXION { //Esta clase puede llamarse conexion
         }
         catch(SQLException ex)
         {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
             return false;
         }
     }

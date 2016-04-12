@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package aplicacionjavaconmysql;
+package sistemafacturacionmuebles;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -44,7 +44,8 @@ public class InicioUSB {
     public static void main(String[] args) {
         // TODO code application logic here
         String codigo="";
-        codigo=leerUSB("H");
+        
+        codigo=leerUSB("F");
         if(!codigo.equals("")){
             codigo=codigo.substring(36);
         } else{
@@ -56,11 +57,19 @@ public class InicioUSB {
                 if(!codigo.equals("")){
                     codigo=codigo.substring(36);
                 } else{
-                    codigo=leerUSB("F");
+                    codigo=leerUSB("H");
+                    if(!codigo.equals("")){
+                        codigo=codigo.substring(36);
+                    } else {
+                        codigo=leerUSB("G");
+                        if(!codigo.equals("")){
+                            codigo=codigo.substring(36);
+                        }
+                    }
                 }
             }
         }
-        if(codigo.equals("00B5-A104")){
+        if(codigo.equals("8218-BE34")){
             Login l = new Login();
             l.setVisible(true);
         } else {

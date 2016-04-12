@@ -3,34 +3,40 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package aplicacionjavaconmysql;
-
-
+package sistemafacturacionmuebles;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Administrador
+ * @author Kevin
  */
-public class Menu extends javax.swing.JFrame {
+public class MENUSFM extends javax.swing.JFrame {
 
+    /**
+     * Creates new form MENUSFM
+     */
+    
     USER u;
     CONEXION conect;
     boolean hUB; //Se hallo coincidencia en borrarUSER
     boolean hAU; //Se puede crear
-    boolean hCC; //Se puede cambiar clave
-    /**
-     * Creates new form Menu
-     */
-    public Menu(USER user) {
+    boolean hCC; //Se pued
+    
+    public MENUSFM(USER user) {
         initComponents();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setSize(screenSize);
         u=user;
         conect = new CONEXION();
         this.hUB=false;
@@ -41,13 +47,13 @@ public class Menu extends javax.swing.JFrame {
     private boolean checkUser(String user){
         boolean h = false;
         this.conect.CONECTAR();
-        ResultSet rs = conect.CONSULTAR("Select * from usuarios WHERE nUser='"+user+"';");
+        ResultSet rs = conect.CONSULTAR("Select * from usuarios WHERE id_usuario='"+user+"';");
         try {
             while(rs.next()){
                 h=true;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MENUSFM.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.conect.CERRAR();
         return h;
@@ -119,6 +125,7 @@ public class Menu extends javax.swing.JFrame {
         
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -149,21 +156,21 @@ public class Menu extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         msgAU = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        comboAdmin = new javax.swing.JComboBox<String>();
+        comboAdmin = new javax.swing.JComboBox<>();
         borrarUser = new javax.swing.JDialog();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtUserBU = new javax.swing.JTextField();
         msgBU = new javax.swing.JLabel();
         btnBorrarBU = new javax.swing.JButton();
-        jInternalFrame1 = new javax.swing.JInternalFrame();
-        jLabel12 = new javax.swing.JLabel();
+        desktopPane = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         cambioClaveM = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -302,7 +309,7 @@ public class Menu extends javax.swing.JFrame {
 
         jLabel7.setText("Administrador:");
 
-        comboAdmin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NO", "SI" }));
+        comboAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO", "SI" }));
 
         javax.swing.GroupLayout agregarUserLayout = new javax.swing.GroupLayout(agregarUser.getContentPane());
         agregarUser.getContentPane().setLayout(agregarUserLayout);
@@ -438,27 +445,14 @@ public class Menu extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SISTEMA DE FACTURACION DE MUEBLES");
+        setBackground(new java.awt.Color(0, 0, 102));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
+        setSize(Toolkit.getDefaultToolkit().getScreenSize());
 
-        jInternalFrame1.setVisible(true);
-
-        jLabel12.setText("CHAPAPA");
-
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(jLabel12)
-                .addContainerGap(141, Short.MAX_VALUE))
-        );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jLabel12)
-                .addContainerGap(96, Short.MAX_VALUE))
-        );
+        desktopPane.setBackground(new java.awt.Color(0, 51, 153));
+        desktopPane.setForeground(new java.awt.Color(0, 51, 153));
 
         jMenu1.setText("Archivo");
 
@@ -484,6 +478,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem3);
+
+        jMenuItem8.setText("Tipo de Muebles");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem8);
 
         jMenuBar1.add(jMenu2);
 
@@ -539,35 +541,15 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(278, Short.MAX_VALUE))
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(209, Short.MAX_VALUE))
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-        clientes id = new clientes();
-        id.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem5MouseClicked
-
-    }//GEN-LAST:event_jMenuItem5MouseClicked
-
-    private void jMenuItem6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem6MouseClicked
-
-    }//GEN-LAST:event_jMenuItem6MouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
@@ -577,25 +559,17 @@ public class Menu extends javax.swing.JFrame {
             InicioUSB i = new InicioUSB();
             String[] s = new String[1];//Dado que main pide un arreglo como argumento
             i.main(s);
-        } 
+        }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        if(u.getAdmin()){
-            //Codigo para añadir nuevo usuario
-            this.agregarUser.setLocationRelativeTo(null);
-            this.agregarUser.setSize(370, 290);
-            this.agregarUser.setResizable(false);
-            this.agregarUser.setVisible(true);
-        } else{
-            JOptionPane.showMessageDialog(null,"No cuenta con privilegios suficientes para realizar esta acción!");
-        }
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+        CLIENTE c = new CLIENTE();
+        c.setVisible(true);
+        this.desktopPane.add(c);
+       
+
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
@@ -610,6 +584,27 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jMenuItem5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem5MouseClicked
+
+    }//GEN-LAST:event_jMenuItem5MouseClicked
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        if(u.getAdmin()){
+            //Codigo para añadir nuevo usuario
+            this.agregarUser.setLocationRelativeTo(null);
+            this.agregarUser.setSize(370, 290);
+            this.agregarUser.setResizable(false);
+            this.agregarUser.setVisible(true);
+        } else{
+            JOptionPane.showMessageDialog(null,"No cuenta con privilegios suficientes para realizar esta acción!");
+        }
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem6MouseClicked
+
+    }//GEN-LAST:event_jMenuItem6MouseClicked
+
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
         if(u.getAdmin()){
@@ -621,101 +616,12 @@ public class Menu extends javax.swing.JFrame {
         } else{
             JOptionPane.showMessageDialog(null,"No cuenta con privilegios suficientes para realizar esta acción!");
         }
-       
+
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
-    private void txtUserBUInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtUserBUInputMethodTextChanged
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_txtUserBUInputMethodTextChanged
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
 
-    private void txtUserBUPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtUserBUPropertyChange
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_txtUserBUPropertyChange
-
-    private void txtUserBUFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUserBUFocusLost
-        // TODO add your handling code here:
-       boolean h = this.checkUser(this.txtUserBU.getText());
-        if(h){
-            this.msgBU.setForeground(Color.GREEN);
-            this.msgBU.setText("Pulse el botón para eliminar este usuario.");
-            this.hUB=true;
-        } else{
-            this.msgBU.setForeground(Color.RED);
-            this.msgBU.setText("*Usuario no existente.");
-            this.hUB=false;
-        }
-    }//GEN-LAST:event_txtUserBUFocusLost
-
-    private void txtUserBUKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserBUKeyPressed
-        // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            this.btnBorrarBU.requestFocus();
-        }
-    }//GEN-LAST:event_txtUserBUKeyPressed
-
-    private void btnBorrarBUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBorrarBUMouseClicked
-        // TODO add your handling code here:
-        if(this.hUB){
-            String usuario = this.txtUserBU.getText();
-            conect.CONECTAR();
-            conect.EJECUTAR("DELETE FROM usuarios WHERE nUser='"+usuario+"';");
-            this.msgBU.setText("");
-            this.txtUserBU.setText("");
-            JOptionPane.showMessageDialog(null,"Datos eliminados correctamente");
-            conect.CERRAR();
-            if(u.getUser().equals(usuario)){
-                JOptionPane.showMessageDialog(null, "Se eliminó el usuario actual. El sistema se cerrará!");
-                InicioUSB ini = new InicioUSB();
-                
-                this.borrarUser.dispose();
-                this.dispose();
-                String[] s = new String[1];
-                ini.main(s);
-            }
-            this.hUB=false;
-        } else {
-            JOptionPane.showMessageDialog(null,"Usuario a eliminar no existe!");
-        }
-    }//GEN-LAST:event_btnBorrarBUMouseClicked
-
-    private void txtUserAUFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUserAUFocusLost
-        // TODO add your handling code here:
-         this.checkDatos(this.txtClave1AU.getPassword(), this.txtClave2AU.getPassword());
-        
-    }//GEN-LAST:event_txtUserAUFocusLost
-
-    private void txtClave1AUFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtClave1AUFocusLost
-        // TODO add your handling code here:
-        this.checkDatos(this.txtClave1AU.getPassword(), this.txtClave2AU.getPassword());
-
-    }//GEN-LAST:event_txtClave1AUFocusLost
-
-    private void txtClave2AUFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtClave2AUFocusLost
-        // TODO add your handling code here:
-        this.checkDatos(this.txtClave1AU.getPassword(), this.txtClave2AU.getPassword());
-       
-    }//GEN-LAST:event_txtClave2AUFocusLost
-
-    private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
-        // TODO add your handling code here:
-        if(this.hAU){
-            int admin = this.comboAdmin.getSelectedIndex()==0 ?0:1;//0 para no, 1 para si
-            conect.CONECTAR();
-            String clave = new String(this.txtClave1AU.getPassword());
-            conect.EJECUTAR("INSERT INTO usuarios(nUser, clave, admin) VALUES('"+this.txtUserAU.getText()+"', '"+clave+"', "+admin+")");
-            this.msgAU.setText("");
-            this.txtUserAU.setText("");
-            this.txtClave1AU.setText("");
-            this.txtClave2AU.setText("");
-            conect.CERRAR();
-            JOptionPane.showMessageDialog(null,"Usuario añadido correctamente!");
-            this.hAU=false;
-        } else {
-            JOptionPane.showMessageDialog(null,"Datos incompletos. Imposible añadir usuario!");
-        }
-    }//GEN-LAST:event_btnAddMouseClicked
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void txtClaveNewFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtClaveNewFocusLost
         // TODO add your handling code here:
@@ -738,7 +644,7 @@ public class Menu extends javax.swing.JFrame {
             String clave = new String(this.txtClaveNew.getPassword());
             this.u.setClave(clave);
             conect.CONECTAR();
-            conect.EJECUTAR("UPDATE usuarios SET clave='"+clave+"' WHERE nUser='"+this.u.getUser()+"';");
+            conect.EJECUTAR("UPDATE usuarios SET clave='"+clave+"' WHERE id_usuario='"+this.u.getUser()+"';");
             conect.CERRAR();
             this.txtClaveNew.setText("");
             this.txtClaveNew2.setText("");
@@ -754,6 +660,106 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.checkDatos(this.txtClaveOld.getPassword(), this.txtClaveNew.getPassword(), this.txtClaveNew2.getPassword());
     }//GEN-LAST:event_txtClaveOldFocusLost
+
+    private void txtUserAUFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUserAUFocusLost
+        // TODO add your handling code here:
+        this.checkDatos(this.txtClave1AU.getPassword(), this.txtClave2AU.getPassword());
+
+    }//GEN-LAST:event_txtUserAUFocusLost
+
+    private void txtClave1AUFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtClave1AUFocusLost
+        // TODO add your handling code here:
+        this.checkDatos(this.txtClave1AU.getPassword(), this.txtClave2AU.getPassword());
+    }//GEN-LAST:event_txtClave1AUFocusLost
+
+    private void txtClave2AUFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtClave2AUFocusLost
+        // TODO add your handling code here:
+        this.checkDatos(this.txtClave1AU.getPassword(), this.txtClave2AU.getPassword());
+
+    }//GEN-LAST:event_txtClave2AUFocusLost
+
+    private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
+        // TODO add your handling code here:
+        if(this.hAU){
+            int admin = this.comboAdmin.getSelectedIndex()==0 ?0:1;//0 para no, 1 para si
+            conect.CONECTAR();
+            String clave = new String(this.txtClave1AU.getPassword());
+            conect.EJECUTAR("INSERT INTO usuarios(id_usuario, clave, admin, activo) VALUES('"+this.txtUserAU.getText()+"', '"+clave+"', "+admin+", 1)");
+            this.msgAU.setText("");
+            this.txtUserAU.setText("");
+            this.txtClave1AU.setText("");
+            this.txtClave2AU.setText("");
+            conect.CERRAR();
+            JOptionPane.showMessageDialog(null,"Usuario añadido correctamente!");
+            this.hAU=false;
+        } else {
+            JOptionPane.showMessageDialog(null,"Datos incompletos. Imposible añadir usuario!");
+        }
+    }//GEN-LAST:event_btnAddMouseClicked
+
+    private void txtUserBUFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUserBUFocusLost
+        // TODO add your handling code here:
+        boolean h = this.checkUser(this.txtUserBU.getText());
+        if(h){
+            this.msgBU.setForeground(Color.GREEN);
+            this.msgBU.setText("Pulse el botón para eliminar este usuario.");
+            this.hUB=true;
+        } else{
+            this.msgBU.setForeground(Color.RED);
+            this.msgBU.setText("*Usuario no existente.");
+            this.hUB=false;
+        }
+    }//GEN-LAST:event_txtUserBUFocusLost
+
+    private void txtUserBUInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtUserBUInputMethodTextChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtUserBUInputMethodTextChanged
+
+    private void txtUserBUPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtUserBUPropertyChange
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtUserBUPropertyChange
+
+    private void txtUserBUKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserBUKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            this.btnBorrarBU.requestFocus();
+        }
+    }//GEN-LAST:event_txtUserBUKeyPressed
+
+    private void btnBorrarBUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBorrarBUMouseClicked
+        // TODO add your handling code here:
+        if(this.hUB){
+            String usuario = this.txtUserBU.getText();
+            conect.CONECTAR();
+            conect.EJECUTAR("UPDATE usuarios SET activo=0 WHERE id_usuario='"+usuario+"';");
+            //conect.EJECUTAR("DELETE FROM usuarios WHERE id_usuario='"+usuario+"';");
+            this.msgBU.setText("");
+            this.txtUserBU.setText("");
+            JOptionPane.showMessageDialog(null,"Datos eliminados correctamente");
+            conect.CERRAR();
+            if(u.getUser().equals(usuario)){
+                JOptionPane.showMessageDialog(null, "Se eliminó el usuario actual. El sistema se cerrará!");
+                InicioUSB ini = new InicioUSB();
+
+                this.borrarUser.dispose();
+                this.dispose();
+                String[] s = new String[1];
+                ini.main(s);
+            }
+            this.hUB=false;
+        } else {
+            JOptionPane.showMessageDialog(null,"Usuario a eliminar no existe!");
+        }
+    }//GEN-LAST:event_btnBorrarBUMouseClicked
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+        TIPOMUEBLE tm = new TIPOMUEBLE();
+        tm.setVisible(true);
+        this.desktopPane.add(tm);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -772,17 +778,22 @@ public class Menu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MENUSFM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MENUSFM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MENUSFM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MENUSFM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -794,11 +805,10 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JDialog cambioClave;
     private javax.swing.JMenu cambioClaveM;
     private javax.swing.JComboBox<String> comboAdmin;
-    private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -817,6 +827,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JLabel msgAU;
     private javax.swing.JLabel msgBU;
     private javax.swing.JLabel msgCC;
@@ -828,4 +839,5 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JTextField txtUserAU;
     private javax.swing.JTextField txtUserBU;
     // End of variables declaration//GEN-END:variables
+
 }

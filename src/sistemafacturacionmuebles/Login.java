@@ -4,10 +4,13 @@
  * and open the template in the editor.
  */
 
-package aplicacionjavaconmysql;
+package sistemafacturacionmuebles;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,6 +28,7 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         conect = new CONEXION();
         this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -110,7 +114,8 @@ public class Login extends javax.swing.JFrame {
         this.conect.CONECTAR();
         boolean h=false, dAdmin=false;
         try{
-            ResultSet rs = conect.CONSULTAR("Select * from usuarios WHERE nUser='"+this.txtUser.getText()+"' and clave='"+this.txtClave.getText()+"';");
+            String pass = new String(this.txtClave.getPassword());
+            ResultSet rs = conect.CONSULTAR("Select * from usuarios WHERE id_usuario='"+this.txtUser.getText()+"' and clave='"+pass+"' and activo=1;");
             while(rs.next()){
                 dAdmin = rs.getString("admin").equals("1")?true:false;
                 h=true;
@@ -121,10 +126,14 @@ public class Login extends javax.swing.JFrame {
         if(!h){
             JOptionPane.showMessageDialog(null, "Usuario o clave inválidos");
         } else{
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
             String clave = new String(this.txtClave.getPassword());
             u= new USER(this.txtUser.getText(), clave,dAdmin);
-            Menu m = new Menu(this.u);
+            MENUSFM m = new MENUSFM(this.u);
+            m.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            m.setSize(screenSize);
             m.setVisible(true);
+            m.setResizable(false);
             this.dispose();
         }
         //Incluir el while rs.next
