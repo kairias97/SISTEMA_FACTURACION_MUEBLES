@@ -577,7 +577,7 @@ public class MENUSFM extends javax.swing.JFrame {
         int salir = JOptionPane.showConfirmDialog(null, "Seguro que desea cerrar sesión?");
         if(salir==0){//Si es 0 entonces quiere salir
             this.dispose();
-            InicioUSB i = new InicioUSB();
+            INICIOUSB i = new INICIOUSB();
             String[] s = new String[1];//Dado que main pide un arreglo como argumento
             i.main(s);
         }
@@ -765,7 +765,7 @@ public class MENUSFM extends javax.swing.JFrame {
             conect.CERRAR();
             if(u.getUser().equals(usuario)){
                 JOptionPane.showMessageDialog(null, "Se eliminó el usuario actual. El sistema se cerrará!");
-                InicioUSB ini = new InicioUSB();
+                INICIOUSB ini = new INICIOUSB();
 
                 this.borrarUser.dispose();
                 this.dispose();
